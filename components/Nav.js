@@ -5,19 +5,20 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-// Logo already links home, so the nav itself mirrors the reference site's
-// four tabs (Work/Studio/Capabilities/Contact) rather than duplicating a
-// "home" entry — "Work" renamed to "Gallery" per direction given.
+// Single-page site: these are section ids on "/", not separate routes.
+// next/link natively handles "/#id" from any page — navigates home then
+// scrolls to the element, or just scrolls if already there.
 const LINKS = [
-  { href: "/portfolio", label: "Gallery" },
-  { href: "/about", label: "Studio" },
-  { href: "/about#focus", label: "Capabilities" },
-  { href: "/contact", label: "Contact" },
+  { id: "work", label: "Gallery" },
+  { id: "studio", label: "Studio" },
+  { id: "capabilities", label: "Capabilities" },
+  { id: "contact", label: "Contact" },
 ];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const pathname = usePathname();
 
   useEffect(() => {
@@ -39,7 +40,28 @@ export default function Nav() {
     setMenuOpen(false);
   }, [pathname]);
 
-  const isActive = (href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  // Scroll-spy: highlight whichever section is currently in view. Only
+  // meaningful on the homepage — project detail pages aren't part of this
+  // taxonomy, so no pill lights up there.
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveSection("");
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+    );
+    const els = LINKS.map((l) => document.getElementById(l.id)).filter(Boolean);
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  const isActive = (id) => activeSection === id;
 
   return (
     <header
@@ -61,12 +83,12 @@ export default function Nav() {
         <nav aria-label="Primary" className="hidden md:flex items-center gap-1 rounded-full border border-hairline p-1">
           {LINKS.map((link) => (
             <Link
-              key={link.href}
-              href={link.href}
-              aria-current={isActive(link.href) ? "page" : undefined}
+              key={link.id}
+              href={`/#${link.id}`}
+              aria-current={isActive(link.id) ? "page" : undefined}
               data-cursor-hover
               className={`rounded-full px-4 py-1.5 font-mono font-semibold text-xs uppercase tracking-[0.15em] transition-colors ${
-                isActive(link.href)
+                isActive(link.id)
                   ? "bg-signal/15 border border-signal text-signal"
                   : "border border-transparent text-dim hover:text-bone"
               }`}
@@ -78,11 +100,11 @@ export default function Nav() {
 
         <div className="flex items-center gap-4">
           <Link
-            href="/contact"
+            href="/#contact"
             data-cursor-text="Let's talk"
             className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-bone px-5 py-2 font-mono font-bold text-xs uppercase tracking-[0.15em] text-ink transition-colors hover:bg-ember hover:text-ink"
           >
-            Hire Me <span aria-hidden="true">↗</span>
+            Start a Project <span aria-hidden="true">↗</span>
           </Link>
 
           {/* Mobile: hamburger toggles a full-screen overlay menu — replaces
@@ -132,21 +154,21 @@ export default function Nav() {
             </Link>
             {LINKS.map((link) => (
               <Link
-                key={link.href}
-                href={link.href}
-                aria-current={isActive(link.href) ? "page" : undefined}
+                key={link.id}
+                href={`/#${link.id}`}
+                aria-current={isActive(link.id) ? "page" : undefined}
                 className={`font-display font-bold text-2xl py-3 border-b border-hairline transition-colors ${
-                  isActive(link.href) ? "text-signal" : "text-bone hover:text-signal"
+                  isActive(link.id) ? "text-signal" : "text-bone hover:text-signal"
                 }`}
               >
                 {link.label}
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="/#contact"
               className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full bg-bone px-5 py-2.5 font-mono font-bold text-xs uppercase tracking-[0.15em] text-ink"
             >
-              Hire Me <span aria-hidden="true">↗</span>
+              Start a Project <span aria-hidden="true">↗</span>
             </Link>
           </motion.nav>
         )}

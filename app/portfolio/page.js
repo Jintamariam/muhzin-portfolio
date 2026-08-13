@@ -1,24 +1,9 @@
-import CinematicReel from "@/components/CinematicReel";
-import PortfolioIndex from "@/components/PortfolioIndex";
-import { projects } from "@/lib/data/projects";
+import { redirect } from "next/navigation";
 
-export const metadata = { title: "Portfolio" };
-
-export default function PortfolioPage() {
-  return (
-    <>
-      <section className="max-w-7xl mx-auto px-6 md:px-10 pt-36 pb-8">
-        <h1 className="font-display font-bold text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.95] tracking-tightest">
-          Portfolio
-        </h1>
-      </section>
-
-      <CinematicReel projects={projects} />
-
-      {/* Plain scannable index — same data as the reel above, filterable by
-          category, for anyone who wants to jump straight to a title rather
-          than scroll the reel */}
-      <PortfolioIndex projects={projects} />
-    </>
-  );
+// The site is single-page now — the full work listing lives at "/#work".
+// This redirect exists only so any old bookmark/link to /portfolio still
+// lands somewhere correct instead of 404ing. Individual project pages
+// (/portfolio/[slug]) are unaffected and remain real routes.
+export default function PortfolioRedirect() {
+  redirect("/#work");
 }

@@ -97,7 +97,7 @@ export default function HeroVideo({
         </motion.p>
         <motion.a
           variants={item}
-          href="#selected-work"
+          href="#work"
           data-cursor-text="Scroll"
           className="group mt-4 inline-flex items-center gap-2 font-mono font-semibold text-[11px] uppercase tracking-[0.15em] text-bone hover:text-signal transition-colors"
         >

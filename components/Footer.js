@@ -57,8 +57,8 @@ export default function Footer() {
 
         <div className="font-mono font-semibold text-xs uppercase tracking-[0.15em] text-dim space-y-2">
           <p>Get in touch</p>
-          <Link href="/contact" className="inline-block text-bone normal-case tracking-normal font-body underline underline-offset-4 hover:text-signal transition-colors">
-            Contact page →
+          <Link href="/#contact" className="inline-block text-bone normal-case tracking-normal font-body underline underline-offset-4 hover:text-signal transition-colors">
+            Contact section →
           </Link>
         </div>
       </div>
