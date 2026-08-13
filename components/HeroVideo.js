@@ -116,12 +116,12 @@ export default function HeroVideo({
         <motion.p variants={item} className="font-mono font-semibold text-xs uppercase tracking-[0.2em] text-signal mb-4">
           {tagline}
         </motion.p>
-        <motion.h1
-          variants={item}
-          className="font-display font-bold text-[clamp(2.75rem,9vw,7rem)] leading-[0.95] tracking-tightest text-bone max-w-4xl"
-        >
-          {title}
-        </motion.h1>
+        <motion.div variants={item} className="flex items-stretch gap-4 md:gap-6 max-w-5xl">
+          <span className="hidden sm:block w-1.5 md:w-2 shrink-0 bg-blue-600 rounded-full" aria-hidden="true" />
+          <h1 className="font-display font-black uppercase text-[clamp(3.25rem,10.5vw,9rem)] leading-[0.92] tracking-tightest text-bone">
+            {title}
+          </h1>
+        </motion.div>
       </motion.div>
 
       {/* Location tag — coordinate-style, matching the camera-HUD metadata

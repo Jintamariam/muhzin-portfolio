@@ -38,6 +38,11 @@ export default function RootLayout({ children }) {
       <body className="font-body bg-ink text-bone antialiased">
         <div className="ambient-glow" aria-hidden="true" />
         <div className="grain-overlay" aria-hidden="true" />
+        {/* Bold blue rails on either edge — persist through scroll (fixed),
+            a simple standard-blue accent against the site's teal/copper
+            palette, framing the page like film-strip edge markings. */}
+        <div className="pointer-events-none fixed left-0 top-0 z-40 h-full w-1 bg-blue-600" aria-hidden="true" />
+        <div className="pointer-events-none fixed right-0 top-0 z-40 h-full w-1 bg-blue-600" aria-hidden="true" />
         <Cursor />
         <Nav />
         <main id="main" className="relative z-[1]">{children}</main>

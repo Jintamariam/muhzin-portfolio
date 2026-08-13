@@ -90,7 +90,7 @@ export default function Nav() {
               className={`rounded-full px-4 py-1.5 font-mono font-semibold text-xs uppercase tracking-[0.15em] transition-colors ${
                 isActive(link.id)
                   ? "bg-signal/15 border border-signal text-signal"
-                  : "border border-transparent text-dim hover:text-bone"
+                  : "border border-transparent text-bone hover:text-signal"
               }`}
             >
               {link.label}
