@@ -80,29 +80,68 @@ export default function HeroVideo({
       <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/10 to-ink" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent" />
 
+      {/* Top-left positioning statement — separate from the bottom name
+          lockup, gives the hero a reason to read before it gives a name.
+          Desktop only: at mobile widths this collided with the location
+          tag and the tagline below it, reading as congested. */}
       <motion.div
-        className="relative z-10 h-full flex flex-col justify-end px-6 md:px-10 pb-20"
+        className="hidden md:block absolute left-6 md:left-10 top-28 md:top-32 z-10 max-w-xs border-l border-hairline pl-5"
+        variants={container}
+        initial="hidden"
+        animate="show"
+        style={reduceMotion ? undefined : { opacity: contentOpacity }}
+      >
+        <motion.p variants={item} className="text-sm text-dim leading-relaxed">
+          Independent cinematographer shaping visual stories for brands,
+          weddings, sports, and film.
+        </motion.p>
+        <motion.a
+          variants={item}
+          href="#selected-work"
+          data-cursor-text="Scroll"
+          className="group mt-4 inline-flex items-center gap-2 font-mono font-semibold text-[11px] uppercase tracking-[0.15em] text-bone hover:text-signal transition-colors"
+        >
+          View Selected Work
+          <span className="block h-px w-5 bg-current transition-all duration-300 group-hover:w-8" />
+        </motion.a>
+      </motion.div>
+
+      <motion.div
+        className="pointer-events-none relative z-10 h-full flex flex-col justify-end px-6 md:px-10 pb-20"
         style={reduceMotion ? undefined : { opacity: contentOpacity, y: contentY }}
         variants={container}
         initial="hidden"
         animate="show"
       >
-        <motion.p variants={item} className="font-mono text-xs uppercase tracking-[0.2em] text-signal mb-4">
+        <motion.p variants={item} className="font-mono font-semibold text-xs uppercase tracking-[0.2em] text-signal mb-4">
           {tagline}
         </motion.p>
         <motion.h1
           variants={item}
-          className="font-display font-medium text-[clamp(2.75rem,9vw,7rem)] leading-[0.95] tracking-tightest text-bone max-w-4xl"
+          className="font-display font-bold text-[clamp(2.75rem,9vw,7rem)] leading-[0.95] tracking-tightest text-bone max-w-4xl"
         >
           {title}
         </motion.h1>
+      </motion.div>
+
+      {/* Location tag — coordinate-style, matching the camera-HUD metadata
+          language used throughout the rest of the site. Desktop only, same
+          congestion reason as the intro block above. */}
+      <motion.div
+        variants={item}
+        initial="hidden"
+        animate="show"
+        className="hidden md:block absolute top-28 right-6 md:right-10 z-10 text-right font-mono font-semibold text-[10px] uppercase tracking-[0.15em] text-dim"
+      >
+        <p>Bengaluru, IN</p>
+        <p>12.9716&deg; N</p>
       </motion.div>
 
       <motion.div
         variants={item}
         initial="hidden"
         animate="show"
-        className="absolute bottom-6 right-6 md:right-10 z-10 font-mono text-[10px] uppercase tracking-[0.15em] text-dim"
+        className="absolute bottom-6 right-6 md:right-10 z-10 font-mono font-semibold text-[10px] uppercase tracking-[0.15em] text-dim"
       >
         Scroll ↓
       </motion.div>

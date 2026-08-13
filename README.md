@@ -135,15 +135,72 @@ the gallery page stays fast even with several video clips in it.
 ## 4. Adding/editing projects
 
 Everything project-related lives in **`lib/data/projects.js`** — add a new
-object to the array and it automatically appears on `/portfolio` and gets
-its own `/portfolio/[slug]` page. No other file needs to change.
+object to the array and it automatically appears on the homepage reel,
+`/portfolio`, and gets its own `/portfolio/[slug]` page. No other file needs
+to change. Drop the new video/poster files in `public/videos` and
+`public/images` first, then copy this into the `projects` array:
 
-## 5. Things to fill in before this goes live
+```js
+{
+  slug: "new-project-slug",       // used in the URL: /portfolio/new-project-slug
+  title: "Project Title",
+  category: "Commercial",          // or "Narrative", "Music Video", etc.
+  year: 2026,
+  role: "Director of Photography",
+  logline: "One sentence describing the project.",
+  specs: { camera: "", lens: "", fps: 24, aperture: "" }, // leave blank strings for unknown specs
+  poster: "/images/new-project-poster.jpg",
+  video: [
+    { src: "/videos/new-project.webm", type: "video/webm" }, // optional but smaller/faster
+    { src: "/videos/new-project.mp4", type: "video/mp4" },
+  ],
+  gallery: [],                     // optional — see section 3b for the format
+  credits: {                       // any role can be left as "" and it just won't show on the page
+    director: "",
+    producer: "",
+    gaffer: "",
+    colourist: "",
+    editor: "",
+  },
+},
+```
 
-- [ ] Real phone number in `components/Footer.js` and `app/contact/page.js`
-      (the one provided was cut off — currently a placeholder)
-- [ ] Real Instagram/Vimeo/LinkedIn URLs (currently placeholder links)
+Only `slug`, `title`, `category`, `year`, `logline`, and `video` are required
+for the project to render correctly — everything else degrades gracefully
+when left blank or omitted.
+
+## 5. Homepage sections beyond the reel
+
+Three extra homepage sections exist as ready-but-empty components — each one
+renders nothing at all until you add data, so there's no "coming soon" gap:
+
+- **Cinematography montage** (`lib/data/montage.js`) — a horizontal reel of
+  short, unlabeled clips ("this is what I can do with a camera"), separate
+  from named projects.
+- **Behind the Frame** (`lib/data/bts.js`) — BTS still paired with the final
+  frame it produced.
+- **Shot on Camera** (`lib/data/shots.js`) — a raw grid of very short clips,
+  numbered rather than titled.
+
+Each file has the exact object shape documented in a comment at the top —
+add an item to the array and the corresponding section appears on the
+homepage automatically.
+
+**Categories on `/portfolio`** are also fully automatic: the filter pills
+are derived from whatever `category` values exist in `lib/data/projects.js`
+(currently Commercial/Narrative/Music Video from the placeholder data). Add
+a project with `category: "Wedding"` or `category: "Sports"` and that pill
+appears with no code changes.
+
+## 6. Things to fill in before this goes live
+
+- [ ] Real Instagram/Vimeo/LinkedIn URLs, if wanted (deliberately omitted
+      for now rather than linking to placeholder pages)
 - [ ] Actual project video/poster files per the paths above
 - [ ] Portrait photo for `/about`
 - [ ] Real crew credit names in `lib/data/projects.js`
+- [ ] Confirm the Gear list in `app/about/page.js` reflects what he actually shoots on
+- [ ] Real project data to replace the three placeholder projects (Night
+      Runner / Quiet Hours / Aftertaste) — including at least one Wedding
+      and one Sports project so those categories/sections have real content
 - [ ] `metadataBase` URL in `app/layout.js` once you have a real domain

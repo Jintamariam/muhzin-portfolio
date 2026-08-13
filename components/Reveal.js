@@ -15,12 +15,17 @@ export default function Reveal({
   y = 24,
   once = true,
   as = "div",
+  ...rest
 }) {
   const reduceMotion = useReducedMotion();
   const Tag = as;
 
   if (reduceMotion) {
-    return <Tag className={className}>{children}</Tag>;
+    return (
+      <Tag className={className} {...rest}>
+        {children}
+      </Tag>
+    );
   }
 
   const MotionTag = motion[as] || motion.div;
@@ -32,6 +37,7 @@ export default function Reveal({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once, margin: "-80px" }}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      {...rest}
     >
       {children}
     </MotionTag>

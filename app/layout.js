@@ -1,28 +1,17 @@
-import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Cursor from "@/components/Cursor";
 
-const display = Fraunces({
+// Single Montserrat instance covers display, body, and mono/HUD-label text —
+// the whole site reads as one bold, confident typeface rather than the
+// previous serif-display + mono-label mix.
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const body = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -33,11 +22,11 @@ export const metadata = {
     template: "Muhzin Mohammed | %s",
   },
   description:
-    "Muhzin Mohammed is a cinematographer working across commercial, narrative, and music video projects.",
+    "Muhzin Mohammed is a cinematographer working across commercials, weddings, sports, narrative, and music video projects.",
   openGraph: {
     title: "Muhzin Mohammed | Cinematographer",
     description:
-      "Muhzin Mohammed is a cinematographer working across commercial, narrative, and music video projects.",
+      "Muhzin Mohammed is a cinematographer working across commercials, weddings, sports, narrative, and music video projects.",
     siteName: "Muhzin Mohammed",
     type: "website",
   },
@@ -45,12 +34,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang="en" className={montserrat.variable}>
       <body className="font-body bg-ink text-bone antialiased">
+        <div className="ambient-glow" aria-hidden="true" />
         <div className="grain-overlay" aria-hidden="true" />
         <Cursor />
         <Nav />
-        <main id="main">{children}</main>
+        <main id="main" className="relative z-[1]">{children}</main>
         <Footer />
       </body>
     </html>

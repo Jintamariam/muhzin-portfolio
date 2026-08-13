@@ -34,38 +34,31 @@ export default function Footer() {
   const tc = useTimecode(24);
 
   return (
-    <footer className="border-t border-hairline mt-32">
+    <footer className="relative z-[1] border-t border-hairline mt-32">
       <div className="max-w-7xl mx-auto px-6 md:px-10 py-14 grid gap-10 md:grid-cols-3">
         <div>
-          <p className="font-display italic text-xl mb-2">Muhzin Mohammed</p>
+          <p className="font-display font-bold italic text-xl mb-2">Muhzin Mohammed</p>
           <p className="text-dim text-sm max-w-xs">
-            Cinematographer working across commercial, narrative, and music video
-            production.
+            Cinematographer working across commercials, weddings, sports, and
+            narrative production.
           </p>
         </div>
 
-        <div className="font-mono text-xs uppercase tracking-[0.15em] text-dim space-y-2">
+        <div className="font-mono font-semibold text-xs uppercase tracking-[0.15em] text-dim space-y-2">
           <p>Email</p>
-          <a href="mailto:muhzinmo@gmail.com" className="block text-bone normal-case tracking-normal font-body hover:text-signal transition-colors">
-            muhzinmo@gmail.com
+          <a href="mailto:muhzinmzk4@gmail.com" className="block text-bone normal-case tracking-normal font-body hover:text-signal transition-colors">
+            muhzinmzk4@gmail.com
           </a>
-          <p className="pt-3">Phone</p>
-          {/* Placeholder — the number provided was incomplete, replace with the full number */}
-          <a href="tel:+91XXXXXXXXXX" className="block text-bone normal-case tracking-normal font-body hover:text-signal transition-colors">
-            +91 97XXXXXXXX <span className="text-dim">(add full number)</span>
+          <p className="pt-3">WhatsApp</p>
+          <a href="https://wa.me/919746010138" target="_blank" rel="noreferrer" className="block text-bone normal-case tracking-normal font-body hover:text-signal transition-colors">
+            +91 97460 10138
           </a>
         </div>
 
-        <div className="font-mono text-xs uppercase tracking-[0.15em] text-dim space-y-2">
-          <p>Elsewhere</p>
-          <a href="https://instagram.com/" target="_blank" rel="noreferrer" className="block text-bone normal-case tracking-normal font-body hover:text-signal transition-colors">
-            Instagram
-          </a>
-          <a href="https://vimeo.com/" target="_blank" rel="noreferrer" className="block text-bone normal-case tracking-normal font-body hover:text-signal transition-colors">
-            Vimeo
-          </a>
-          <Link href="/contact" className="inline-block mt-4 text-bone normal-case tracking-normal font-body underline underline-offset-4 hover:text-signal transition-colors">
-            Get in touch →
+        <div className="font-mono font-semibold text-xs uppercase tracking-[0.15em] text-dim space-y-2">
+          <p>Get in touch</p>
+          <Link href="/contact" className="inline-block text-bone normal-case tracking-normal font-body underline underline-offset-4 hover:text-signal transition-colors">
+            Contact page →
           </Link>
         </div>
       </div>

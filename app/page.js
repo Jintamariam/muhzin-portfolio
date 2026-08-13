@@ -1,7 +1,13 @@
 import HeroVideo from "@/components/HeroVideo";
 import CinematicReel from "@/components/CinematicReel";
+import CinematographyMontage from "@/components/CinematographyMontage";
+import BehindTheFrame from "@/components/BehindTheFrame";
+import ShotGrid from "@/components/ShotGrid";
 import Link from "next/link";
 import { projects } from "@/lib/data/projects";
+import { montageClips } from "@/lib/data/montage";
+import { btsPairs } from "@/lib/data/bts";
+import { shots } from "@/lib/data/shots";
 
 export default function HomePage() {
   return (
@@ -27,14 +33,14 @@ export default function HomePage() {
         </p>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 md:px-10 pb-8 pt-4">
+      <section id="selected-work" className="max-w-7xl mx-auto px-6 md:px-10 pb-8 pt-4 scroll-mt-24">
         <div className="flex items-end justify-between">
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-dim">
+          <h2 className="font-mono font-semibold text-xs uppercase tracking-[0.2em] text-dim">
             Selected Work
           </h2>
           <Link
             href="/portfolio"
-            className="font-mono text-xs uppercase tracking-[0.15em] text-bone hover:text-signal transition-colors"
+            className="font-mono font-semibold text-xs uppercase tracking-[0.15em] text-bone hover:text-signal transition-colors"
           >
             View all →
           </Link>
@@ -42,6 +48,10 @@ export default function HomePage() {
       </section>
 
       <CinematicReel projects={projects} />
+
+      <CinematographyMontage clips={montageClips} />
+      <BehindTheFrame pairs={btsPairs} />
+      <ShotGrid shots={shots} />
     </>
   );
 }

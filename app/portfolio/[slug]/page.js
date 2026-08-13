@@ -44,10 +44,10 @@ export default function ProjectPage({ params }) {
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/60" />
         <Reveal className="relative z-10 h-full flex flex-col justify-end px-6 md:px-10 pb-14">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-signal mb-3">
+          <p className="font-mono font-semibold text-xs uppercase tracking-[0.2em] text-signal mb-3">
             {project.category} — {project.year}
           </p>
-          <h1 className="font-display font-medium text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.95] tracking-tightest">
+          <h1 className="font-display font-bold text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.95] tracking-tightest">
             {project.title}
           </h1>
         </Reveal>
@@ -61,38 +61,42 @@ export default function ProjectPage({ params }) {
 
       {/* Technical breakdown — camera-HUD spec sheet, consistent with the grid badges */}
       <Reveal as="section" className="max-w-7xl mx-auto px-6 md:px-10 pb-20">
-        <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-dim mb-6">
+        <h2 className="font-mono font-semibold text-xs uppercase tracking-[0.2em] text-dim mb-6">
           Technical
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-hairline border border-hairline">
           {Object.entries({
             Camera: project.specs.camera,
             Lens: project.specs.lens,
-            "Frame Rate": `${project.specs.fps}fps`,
+            "Frame Rate": project.specs.fps ? `${project.specs.fps}fps` : "",
             Aperture: project.specs.aperture,
-          }).map(([label, value]) => (
-            <div key={label} className="bg-ink p-5">
-              <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-dim mb-1">
-                {label}
-              </p>
-              <p className="font-body text-bone">{value}</p>
-            </div>
-          ))}
+          })
+            .filter(([, value]) => value && value.trim())
+            .map(([label, value]) => (
+              <div key={label} className="bg-ink p-5">
+                <p className="font-mono font-semibold text-[10px] uppercase tracking-[0.15em] text-dim mb-1">
+                  {label}
+                </p>
+                <p className="font-body text-bone">{value}</p>
+              </div>
+            ))}
         </div>
       </Reveal>
 
       {/* Credits */}
       <Reveal as="section" className="max-w-4xl mx-auto px-6 md:px-10 pb-24">
-        <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-dim mb-6">
+        <h2 className="font-mono font-semibold text-xs uppercase tracking-[0.2em] text-dim mb-6">
           Credits
         </h2>
         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
-          {Object.entries(project.credits).map(([role, name]) => (
-            <div key={role} className="flex justify-between border-b border-hairline pb-2">
-              <dt className="text-dim capitalize">{role}</dt>
-              <dd className="text-bone">{name}</dd>
-            </div>
-          ))}
+          {Object.entries(project.credits)
+            .filter(([, name]) => name && name.trim())
+            .map(([role, name]) => (
+              <div key={role} className="flex justify-between border-b border-hairline pb-2">
+                <dt className="text-dim capitalize">{role}</dt>
+                <dd className="text-bone">{name}</dd>
+              </div>
+            ))}
           <div className="flex justify-between border-b border-hairline pb-2">
             <dt className="text-dim">Director of Photography</dt>
             <dd className="text-bone">Muhzin Mohammed</dd>
@@ -103,7 +107,7 @@ export default function ProjectPage({ params }) {
       {/* Related projects */}
       {related.length > 0 && (
         <Reveal as="section" className="max-w-7xl mx-auto px-6 md:px-10 pb-28">
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-dim mb-6">
+          <h2 className="font-mono font-semibold text-xs uppercase tracking-[0.2em] text-dim mb-6">
             Related
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -111,6 +115,7 @@ export default function ProjectPage({ params }) {
               <Link
                 key={p.slug}
                 href={`/portfolio/${p.slug}`}
+                data-cursor-text="View Film"
                 className="group block relative aspect-[16/9] overflow-hidden bg-ink2"
               >
                 <AutoplayVideoTile
@@ -120,7 +125,7 @@ export default function ProjectPage({ params }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/90 to-transparent" />
                 <div className="absolute bottom-4 left-4">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-signal mb-1">
+                  <p className="font-mono font-semibold text-[10px] uppercase tracking-[0.15em] text-signal mb-1">
                     {p.category}
                   </p>
                   <p className="font-display text-xl text-bone">{p.title}</p>

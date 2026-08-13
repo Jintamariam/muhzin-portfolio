@@ -11,23 +11,28 @@ const GEAR = [
   "DJI Ronin 4D",
 ];
 
-const TIMELINE = [
-  { year: "2026", entry: "Add most recent project or milestone here." },
-  { year: "2025", entry: "Add a prior project or milestone here." },
-  { year: "2024", entry: "Add earliest listed project or training here." },
+const FOCUS = [
+  "Natural & practical lighting",
+  "Fast-turnaround commercial sets",
+  "Music video visual concepting",
+  "Handheld, observational coverage for narrative work",
+  "Wedding films & highlights",
+  "High-energy sports & movement coverage",
 ];
 
 export default function AboutPage() {
   return (
     <section className="max-w-5xl mx-auto px-6 md:px-10 pt-36 pb-28">
-      <h1 className="font-display font-medium text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.95] tracking-tightest mb-14">
+      <h1 className="font-display font-bold text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.95] tracking-tightest mb-14">
         About
       </h1>
 
       <div className="grid md:grid-cols-[1fr,1.4fr] gap-14">
         <Reveal className="relative aspect-[3/4] bg-ink2 border border-hairline flex items-center justify-center overflow-hidden">
           {/* Viewfinder-style placeholder — corner brackets + crosshair,
-              reads as an intentional design element rather than a TODO box */}
+              reads as an intentional design element rather than a TODO box.
+              Swap for a real <img src="/images/portrait.jpg"> once a
+              portrait is ready. */}
           <span className="absolute left-4 top-4 h-5 w-5 border-l border-t border-hairline" />
           <span className="absolute right-4 top-4 h-5 w-5 border-r border-t border-hairline" />
           <span className="absolute left-4 bottom-4 h-5 w-5 border-l border-b border-hairline" />
@@ -46,39 +51,50 @@ export default function AboutPage() {
               allowed to see.
             </p>
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.06}>
+            <p className="font-mono font-semibold text-xs uppercase tracking-[0.15em] text-dim">
+              Based in Bengaluru, India — available for projects across India
+            </p>
+          </Reveal>
+          <Reveal delay={0.1} className="space-y-4">
             <p className="text-dim leading-relaxed">
-              [Add 2–3 short paragraphs here: background, how you got into
-              cinematography, and what you look for in a project. Keep it
-              confident and specific — avoid generic statements every DOP's
-              about page has.]
+              Working across commercial, wedding, sports, and narrative sets
+              within the Malayalam film industry, my approach starts with
+              light — where it comes from, what it hides, and what it&rsquo;s
+              willing to give up. I&rsquo;d rather build a shot around one
+              well-placed practical than fix it later in the grade.
+            </p>
+            <p className="text-dim leading-relaxed">
+              I&rsquo;m drawn to projects with a clear visual point of view —
+              directors who know what they want a frame to feel like, even if
+              they can&rsquo;t always name it. My job is to translate that
+              feeling into camera position, lens choice, and light, and to do
+              it fast enough that a set never loses momentum waiting on me.
             </p>
           </Reveal>
 
-          <Reveal delay={0.15} className="pt-6">
-            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-dim mb-4">
-              Experience
+          <Reveal id="focus" delay={0.15} className="pt-6 scroll-mt-28">
+            <h2 className="font-mono font-semibold text-xs uppercase tracking-[0.2em] text-dim mb-4">
+              Focus
             </h2>
-            <ul className="space-y-4">
-              {TIMELINE.map((t, i) => (
+            <ul className="space-y-3">
+              {FOCUS.map((item, i) => (
                 <Reveal
                   as="li"
-                  key={t.year}
-                  delay={i * 0.08}
-                  y={12}
-                  className="flex gap-6 border-b border-hairline pb-4"
+                  key={item}
+                  delay={i * 0.06}
+                  y={10}
+                  className="flex items-center gap-3 text-bone"
                 >
-                  <span className="font-mono text-sm text-signal w-14 shrink-0">
-                    {t.year}
-                  </span>
-                  <span className="text-bone">{t.entry}</span>
+                  <span className="h-1 w-1 rounded-full bg-signal shrink-0" />
+                  {item}
                 </Reveal>
               ))}
             </ul>
           </Reveal>
 
           <Reveal delay={0.2} className="pt-6">
-            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-dim mb-4">
+            <h2 className="font-mono font-semibold text-xs uppercase tracking-[0.2em] text-dim mb-4">
               Gear
             </h2>
             <div className="flex flex-wrap gap-2">

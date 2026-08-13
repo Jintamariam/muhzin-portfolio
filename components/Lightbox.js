@@ -49,12 +49,12 @@ export default function Lightbox({ items, index, onClose, onNavigate }) {
       aria-label="Gallery viewer"
     >
       <div className="flex items-center justify-between px-6 md:px-10 h-20 shrink-0">
-        <p className="font-mono text-xs uppercase tracking-[0.15em] text-dim">
+        <p className="font-mono font-semibold text-xs uppercase tracking-[0.15em] text-dim">
           {index + 1} / {items.length}
         </p>
         <button
           onClick={onClose}
-          className="font-mono text-xs uppercase tracking-[0.15em] text-bone hover:text-signal transition-colors"
+          className="font-mono font-semibold text-xs uppercase tracking-[0.15em] text-bone hover:text-signal transition-colors"
           aria-label="Close gallery"
         >
           Close ✕

@@ -66,7 +66,7 @@ export default function CinematicReel({ projects }) {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/10 to-ink/90 z-[5]" />
 
         {/* Reel counter */}
-        <div className="absolute top-6 left-6 md:left-10 z-20 font-mono text-[10px] uppercase tracking-[0.15em] text-dim">
+        <div className="absolute top-6 left-6 md:left-10 z-20 font-mono font-semibold text-[10px] uppercase tracking-[0.15em] text-dim">
           {String(active + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
         </div>
 
@@ -80,7 +80,7 @@ export default function CinematicReel({ projects }) {
               aria-label={`Jump to ${p.title}`}
             >
               <span
-                className={`font-mono text-[10px] uppercase tracking-[0.15em] transition-colors ${
+                className={`font-mono font-semibold text-[10px] uppercase tracking-[0.15em] transition-colors ${
                   active === i ? "text-signal" : "text-dim group-hover:text-bone"
                 }`}
               >
@@ -100,13 +100,13 @@ export default function CinematicReel({ projects }) {
         <div className="absolute bottom-6 left-6 md:left-10 z-20">
           <Link
             href={`/portfolio/${projects[active].slug}`}
-            className="font-mono text-xs uppercase tracking-[0.15em] text-bone hover:text-signal transition-colors inline-flex items-center gap-2"
+            className="font-mono font-semibold text-xs uppercase tracking-[0.15em] text-bone hover:text-signal transition-colors inline-flex items-center gap-2"
           >
             View project <span aria-hidden="true">→</span>
           </Link>
         </div>
 
-        <div className="absolute bottom-6 right-6 md:right-10 z-20 font-mono text-[10px] uppercase tracking-[0.15em] text-dim">
+        <div className="absolute bottom-6 right-6 md:right-10 z-20 font-mono font-semibold text-[10px] uppercase tracking-[0.15em] text-dim">
           Scroll ↓
         </div>
       </div>
@@ -148,6 +148,14 @@ function ReelSlide({ project, index, total, scrollYProgress, isActive, reduceMot
     }
   }, [isActive]);
 
+  const specLine = [
+    project.specs.fps ? `${project.specs.fps}fps` : "",
+    project.specs.aperture,
+    project.specs.lens ? project.specs.lens.split(" ")[0] : "",
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
   return (
     <motion.div
       className="absolute inset-0"
@@ -176,15 +184,17 @@ function ReelSlide({ project, index, total, scrollYProgress, isActive, reduceMot
             : { y: titleY, opacity: titleOpacity }
         }
       >
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-signal mb-4">
+        <p className="font-mono font-semibold text-xs uppercase tracking-[0.2em] text-signal mb-4">
           {project.category} — {project.year}
         </p>
-        <h2 className="font-display font-medium text-[clamp(3rem,10vw,8.5rem)] leading-[0.92] tracking-tightest text-bone max-w-5xl">
+        <h2 className="font-display font-bold text-[clamp(3rem,10vw,8.5rem)] leading-[0.92] tracking-tightest text-bone max-w-5xl">
           {project.title}
         </h2>
-        <div className="mt-5 font-mono text-[10px] uppercase tracking-[0.15em] text-bone/80">
-          {project.specs.fps}fps · {project.specs.aperture} · {project.specs.lens.split(" ")[0]}
-        </div>
+        {specLine && (
+          <div className="mt-5 font-mono font-semibold text-[10px] uppercase tracking-[0.15em] text-bone/80">
+            {specLine}
+          </div>
+        )}
       </motion.div>
     </motion.div>
   );

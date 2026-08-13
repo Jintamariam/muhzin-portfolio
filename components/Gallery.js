@@ -35,13 +35,13 @@ export default function Gallery({ gallery = [] }) {
   return (
     <Reveal as="section" className="max-w-7xl mx-auto px-6 md:px-10 pb-24">
       <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
-        <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-dim">Gallery</h2>
+        <h2 className="font-mono font-semibold text-xs uppercase tracking-[0.2em] text-dim">Gallery</h2>
         <div className="flex flex-wrap gap-2">
           {FILTERS.map((f) => (
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
-              className={`relative font-mono text-[10px] uppercase tracking-[0.15em] px-3 py-1.5 border transition-colors ${
+              className={`relative font-mono font-semibold text-[10px] uppercase tracking-[0.15em] px-3 py-1.5 border transition-colors ${
                 filter === f.key
                   ? "border-transparent text-signal"
                   : "border-hairline text-dim hover:text-bone hover:border-bone"
@@ -71,6 +71,7 @@ export default function Gallery({ gallery = [] }) {
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.3 }}
               onClick={() => setOpenIndex(i)}
+              data-cursor-text={item.type === "video" ? "Play" : "Open"}
               className="group relative aspect-[4/3] overflow-hidden bg-ink2"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -9,6 +9,39 @@ html {
 body {
   background-color: #0b0c0c;
   color: #edeae2;
+  font-weight: 500; /* Montserrat 400 reads thin; 500 is the readable-paragraph floor */
+}
+
+/* Ambient grade — two soft, blurred colour washes (cool teal / warm
+   copper) fixed behind all content. Subtle enough to read as depth and
+   intent rather than a colour scheme, but it's what keeps the site from
+   reading as flat black-and-white. */
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ambient-glow::before,
+.ambient-glow::after {
+  content: "";
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.16;
+}
+.ambient-glow::before {
+  top: -15vw;
+  left: -15vw;
+  background: #4f8a82;
+}
+.ambient-glow::after {
+  bottom: -20vw;
+  right: -15vw;
+  background: #c9824d;
 }
 
 @media (prefers-reduced-motion: reduce) {
